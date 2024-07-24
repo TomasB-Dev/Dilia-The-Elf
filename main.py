@@ -18,14 +18,27 @@ font = pygame.font.Font(font_family, 36)
 font_start = pygame.font.Font(font_family, 90)
 line_height = 40
 max_width = 700
+box_padding = 20  # Espacio interno del cuadro de diálogo
 
 # Carga los diálogos desde el archivo JSON
 def load_dialogues(filename):
     with open(filename, 'r', encoding='utf-8') as f:
         return json.load(f)
 
-# Renderiza el texto en la pantalla
-def render_text(text, x, y, color=(0, 0, 0)):
+# Renderiza el texto con sombra
+def render_text_with_shadow(text, x, y, text_color=(255, 255, 255), shadow_color=(0, 0, 0), shadow_offset=(2, 2)):
+    # Renderiza la sombra
+    shadow_surf = font.render(text, True, shadow_color)
+    shadow_rect = shadow_surf.get_rect(topleft=(x + shadow_offset[0], y + shadow_offset[1]))
+    screen.blit(shadow_surf, shadow_rect)
+
+    # Renderiza el texto principal
+    text_surf = font.render(text, True, text_color)
+    text_rect = text_surf.get_rect(topleft=(x, y))
+    screen.blit(text_surf, text_rect)
+
+# Ajusta el texto dentro del cuadro de diálogo con salto de línea automático
+def render_text_with_wrapping(text, x, y, max_width, color=(255, 255, 255)):
     words = text.split(' ')
     lines = []
     current_line = ""
@@ -39,16 +52,14 @@ def render_text(text, x, y, color=(0, 0, 0)):
             current_line = word + " "
     lines.append(current_line)
 
-    for i, line in enumerate(lines):
-        text_surface = font.render(line, True, color)
-        screen.blit(text_surface, (x, y + i * line_height))
+    return lines
 
 # Dibuja un fondo semitransparente detrás del texto
-def draw_transparent_background(x, y, width, height, color=(255, 255, 255), alpha=150):
-    overlay = pygame.Surface((width, height))  # Crear una superficie
-    overlay.set_alpha(alpha)  # Establecer transparencia
-    overlay.fill(color)  # Rellenar con el color
-    screen.blit(overlay, (x, y))  # Dibujar sobre la pantalla
+def draw_dialogue_box(x, y, width, height, color=(0, 0, 0), alpha=200):
+    box_surf = pygame.Surface((width, height))
+    box_surf.set_alpha(alpha)
+    box_surf.fill(color)
+    screen.blit(box_surf, (x, y))
 
 # Reproduce el audio correspondiente
 def play_audio(audio_file):
@@ -110,18 +121,28 @@ def main():
 
         screen.blit(background_image, (0, 0))  # Usa la imagen de fondo
         node = dialogues[current_node]
-        #aca podria poner if y agregar la imagen correspondiente por encima asi queda debajo del texto
+
+        # Muestra la imagen correspondiente si existe
         if 'img' in node:
             image = pygame.image.load(node['img'])
             scaled_image = pygame.transform.scale(image, (400, 300))
             screen.blit(scaled_image, (0, 310))
-        render_text(node['text'], 50, 195)
+        
+        # Dibuja el cuadro de diálogo y renderiza el texto
+        dialog_box_x, dialog_box_y = 50, 50
+        dialog_box_width = max_width
+        dialog_box_height = 300
+        draw_dialogue_box(dialog_box_x, dialog_box_y, dialog_box_width, dialog_box_height)
+
+        if 'text' in node:
+            lines = render_text_with_wrapping(node['text'], dialog_box_x + box_padding, dialog_box_y + box_padding, dialog_box_width - 2 * box_padding)
+            for i, line in enumerate(lines):
+                render_text_with_shadow(line, dialog_box_x + box_padding, dialog_box_y + box_padding + i * line_height)
 
         # Reproduce la pista de audio correspondiente
         if 'audio' in node:
             play_audio(node['audio'])
                 
-
         # Dibuja opciones si existen
         if 'options' in node:
             option_y = 450
@@ -130,9 +151,9 @@ def main():
                 option_width = font.size(option_text)[0]
                 option_x = (800 - option_width) // 2
                 # Dibuja el fondo semitransparente antes de renderizar el texto
-                draw_transparent_background(option_x - 10, option_y - 10, option_width + 20, line_height + 20)
-                render_text(option_text, option_x, option_y)
-                option_y += 60  # Espaciado entre opciones
+                draw_dialogue_box(option_x - 10, option_y - 10, option_width + 20, line_height + 20, color=(0, 0, 0), alpha=150)
+                render_text_with_shadow(option_text, option_x, option_y)  # Texto con sombra
+                option_y += 90  # Espaciado entre opciones
 
         pygame.display.flip()
 
@@ -148,7 +169,7 @@ def main():
                     if 'options' in node:
                         # Manejo de opciones si existen
                         x, y = pygame.mouse.get_pos()
-                        option_y = 420
+                        option_y = 450
                         for option in node['options']:
                             option_width = font.size(option['text'])[0]
                             option_x = (800 - option_width) // 2
