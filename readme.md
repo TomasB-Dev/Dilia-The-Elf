@@ -5,26 +5,22 @@
 ## Estructura del Proyecto
 
 El proyecto tiene la siguiente estructura de carpetas:
-
 Delia/
-├── assets/
-│ ├── file.png
-│ ├── fuentes/
-│ │ └── Baby_Stingrays.ttf
-│ └── sounds/
-│ └── Bosque_Encantado.mp3
-├── dialogues.json
-└── main.py
-markdown
-Copiar código
+├── assets/ 
+│ ├── file.png 
+│ ├── fuentes/ 
+│ │ └── Baby_Stingrays.ttf 
+│ └── sounds/ 
+│ └── Bosque_Encantado.mp3 
+├── dialogues.json 
+└── main.py 
 
-- `assets/file.png`: Imagen de fondo utilizada en el juego.
+ - `assets/file.png`: Imagen de fondo utilizada en el juego.
 - `assets/fuentes/Baby_Stingrays.ttf`: Fuente utilizada para el texto en el juego.
 - `assets/sounds/Bosque_Encantado.mp3`: Música de fondo del juego.
 - `dialogues.json`: Archivo JSON que contiene los diálogos y opciones del juego.
 - `main.py`: Script principal del juego.
-
-## Instalación
+- ## Instalación
 
 1. Clona el repositorio:
     ```bash
@@ -47,20 +43,25 @@ Para ejecutar el juego, simplemente corre el script `main.py`:
 
 ```bash
 python main.py
-Funcionamiento del Juego
-Pantalla de Inicio: El juego comienza con una pantalla de inicio que muestra el título "Dilia The Elf" y un botón "JUGAR". Haz clic en el botón para iniciar el juego.
+```
+### Parte 3: Funcionamiento del Juego y Archivos JSON
 
-Diálogos: Durante el juego, los diálogos se muestran en la pantalla. Los textos largos se ajustan automáticamente al ancho máximo definido.
 
-Opciones: Si hay opciones disponibles en los diálogos, se muestran debajo del texto principal. Haz clic en una opción para tomar una decisión y avanzar en la historia.
+## Funcionamiento del Juego
 
-Imágenes y Audio: Las imágenes y el audio se cargan y reproducen según el contenido del archivo dialogues.json.
+1. **Pantalla de Inicio**: El juego comienza con una pantalla de inicio que muestra el título "Dilia The Elf" y un botón "JUGAR". Haz clic en el botón para iniciar el juego.
 
-Archivos JSON
-El archivo dialogues.json contiene la estructura de diálogos y opciones del juego. Aquí hay un ejemplo de formato:
+2. **Diálogos**: Durante el juego, los diálogos se muestran en la pantalla. Los textos largos se ajustan automáticamente al ancho máximo definido.
 
-json
-Copiar código
+3. **Opciones**: Si hay opciones disponibles en los diálogos, se muestran debajo del texto principal. Haz clic en una opción para tomar una decisión y avanzar en la historia.
+
+4. **Imágenes y Audio**: Las imágenes y el audio se cargan y reproducen según el contenido del archivo `dialogues.json`.
+
+## Archivos JSON
+
+El archivo `dialogues.json` contiene la estructura de diálogos y opciones del juego. Aquí hay un ejemplo de formato:
+
+```json
 {
   "start": {
     "text": "Bienvenida a la aventura, Dilia.",
@@ -89,14 +90,23 @@ Copiar código
     "text": "Fin de la aventura."
   }
 }
-Contribuciones
+```
+### Parte 4: Contribuciones y Licencia
+
+
+## Contribuciones
+
 Si deseas contribuir al proyecto, por favor sigue estos pasos:
 
-Fork el repositorio.
-Crea una rama para tu funcionalidad o corrección de errores.
-Realiza tus cambios y haz commits.
-Envía un pull request con una descripción clara de tus cambios.
-Licencia
-Este proyecto está bajo la Licencia MIT. Consulta el archivo LICENSE para más detalles.
+1. Fork el repositorio.
+2. Crea una rama para tu funcionalidad o corrección de errores.
+3. Realiza tus cambios y haz commits.
+4. Envía un pull request con una descripción clara de tus cambios.
+
+## Licencia
+
+Este proyecto está bajo la Licencia MIT. Consulta el archivo `LICENSE` para más detalles.
+
+---
 
 ¡Gracias por jugar a "Dilia The Elf"! Esperamos que disfrutes la aventura.
