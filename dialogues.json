@@ -1,0 +1,196 @@
+{
+    "start": {
+        "text": "Dilia, una guerrera elfa, vive en el tranquilo bosque de Eldoria. Desde joven, ha sido entrenada en el arte de la espada y la magia por los ancianos del bosque.",
+        "next": "start_part_2",
+        "audio": "assets/sounds/start.mp3",
+        "img":"assets/img/dilia.png"
+    },
+    "start_part_2": {
+        "text": "Un día, recibe una visión de la Gran Árbol Madre, quien le muestra que el bosque está en peligro. Una fuerza oscura, liderada por el malvado hechicero Morven, amenaza con destruir todo lo que ella ama.",
+        "next": "decision_1",
+        "audio": "assets/sounds/start_part_2.mp3",
+        "img":"assets/img/dilia.png"
+    },
+    "decision_1": {
+        "text": "¿Qué debería hacer ahora?",
+        "options": [
+            {"text": "Viajar sola", "next": "sola_1"},
+            {"text": "Reunir un grupo", "next": "grupo_1"}
+        ],
+        "audio": "assets/sounds/decision_1.mp3",
+        "img":"assets/img/dilia.png"
+    },
+    "sola_1": {
+        "text": "Dilia decide emprender su peligrosa misión en solitario. Armando su espada y recogiendo un par de pociones mágicas, se adentra en la vasta oscuridad del bosque.",
+        "next": "sola_2",
+        "audio": "assets/sounds/sola_1.mp3",
+        "img":"assets/img/dilia2.png"
+    },
+    "sola_2": {
+        "text": "A medida que avanza, el entorno se vuelve cada vez más hostil. El suelo cruje bajo sus pies y las sombras parecen moverse a su alrededor.",
+        "next": "sola_3",
+        "audio": "assets/sounds/sola_2.mp3",
+        "img":"assets/img/dilia2.png"
+    },
+    "sola_3": {
+        "text": "A pesar de su destreza, la soledad del viaje pesa sobre ella, haciendo cada sonido y cada movimiento aún más inquietantes.",
+        "next": "sola_4",
+        "audio": "assets/sounds/sola_3.mp3",
+        "img":"assets/img/dilia2.png"
+    },
+    "sola_4": {
+        "text": "La primera noche en el bosque es particularmente dura. Dilia encuentra un refugio en una cueva cercana y enciende un pequeño fuego.",
+        "next": "sola_5",
+        "audio": "assets/sounds/sola_4.mp3",
+        "img":"assets/img/dilia2.png"
+    },
+    "sola_5": {
+        "text": "Mientras el crepitar de las llamas rompe el silencio, ella reflexiona sobre su decisión y sobre las pruebas que le esperan.",
+        "next": "sola_6",
+        "audio": "assets/sounds/sola_5.mp3",
+        "img":"assets/img/dilia2.png"
+    },
+    "sola_6": {
+        "text": "Al amanecer, se enfrenta a su primer desafío: una emboscada de criaturas oscuras que surgen entre los árboles. La batalla es feroz y cada golpe cuenta.",
+        "next": "sola_7",
+        "audio": "assets/sounds/sola_6.mp3",
+        "img":"assets/img/dilia2.png"
+    },
+    "sola_7": {
+        "text": "Su entrenamiento se pone a prueba mientras lucha con valentía, pero también se da cuenta de que está sola en esta lucha.",
+        "options": [
+            {"text": "Buscar ayuda en el bosque", "next": "sola_help"},
+            {"text": "Continuar sin ayuda", "next": "sola_alone"}
+        ],
+        "audio": "assets/sounds/sola_7.mp3",
+        "img":"assets/img/dilia2.png"
+    },
+    "sola_help": {
+        "text": "Dilia decide buscar ayuda en el bosque. Después de un arduo viaje, encuentra un anciano sabio que le ofrece asistencia mágica y conocimientos para enfrentar a las criaturas.",
+        "next": "sola_end_1",
+        "audio": "assets/sounds/sola_help.mp3",
+        "img":"assets/img/dilia2.png"
+    },
+    "sola_alone": {
+        "text": "Dilia elige continuar sola. Su determinación la lleva a enfrentar más desafíos y a descubrir antiguos secretos del bosque.",
+        "next": "sola_alone_subplot",
+        "audio": "assets/sounds/sola_alone.mp3",
+        "img":"assets/img/dilia2.png"
+    },
+    "sola_alone_subplot": {
+        "text": "Mientras explora, Dilia descubre una antigua ruina elfa. Dentro, encuentra un viejo diario que revela secretos sobre el pasado del bosque y un poderoso artefacto escondido.",
+        "options": [
+            {"text": "Investigar el artefacto", "next": "sola_artifact"},
+            {"text": "Dejar el artefacto y seguir adelante", "next": "sola_keep_exploring"}
+        ],
+        "audio": "assets/sounds/sola_alone_subplot.mp3",
+        "img":"assets/img/dilia2.png"
+    },
+    "sola_artifact": {
+        "text": "Dilia decide investigar el artefacto. Al tocarlo, siente una oleada de energía mágica que le otorga una habilidad especial: la capacidad de ver a través de las ilusiones.",
+        "next": "sola_end_2",
+        "audio": "assets/sounds/sola_artifact.mp3",
+        "img":"assets/img/dilia2.png"
+    },
+    "sola_keep_exploring": {
+        "text": "Decide dejar el artefacto y seguir explorando. Sin embargo, se encuentra con una trampa mágica que la pone en grave peligro. La situación es tensa, pero logra salir con vida.",
+        "next": "sola_end_2",
+        "audio": "assets/sounds/sola_keep_exploring.mp3",
+        "img":"assets/img/dilia2.png"
+    },
+    "sola_end_1": {
+        "text": "Con la ayuda del anciano, Dilia logra vencer las criaturas oscuras y encuentra una solución para salvar el bosque. Regresa a casa con una mayor sabiduría y respeto por los antiguos poderes del bosque.",
+        "next": null,
+        "audio": "assets/sounds/sola_end_1.mp3",
+        "img":"assets/img/dilia2.png"
+    },
+    "sola_end_2": {
+        "text": "A pesar de los muchos desafíos, Dilia logra salvar el bosque por su cuenta, pero el viaje la deja marcada y más sabia. Regresa con nuevas historias y lecciones aprendidas.",
+        "next": null,
+        "audio": "assets/sounds/sola_end_2.mp3",
+        "img":"assets/img/dilia2.png"
+    },
+    "grupo_1": {
+        "text": "Dilia decide que necesita más que su habilidad y coraje para enfrentar el desafío. Busca a los mejores y más confiables aliados que pueda encontrar.",
+        "next": "grupo_2",
+        "audio": "assets/sounds/grupo_1.mp3"
+    },
+    "grupo_2": {
+        "text": "Su primera parada es en la aldea de los enanos, donde recluta a Thrain, un fuerte guerrero conocido por su destreza en el combate.",
+        "next": "grupo_3",
+        "audio": "assets/sounds/grupo_2.mp3"
+    },
+    "grupo_3": {
+        "text": "Luego, visita la torre de los magos para convencer a Elara, una hechicera con amplios conocimientos de magia antigua.",
+        "next": "grupo_4",
+        "audio": "assets/sounds/grupo_3.mp3"
+    },
+    "grupo_4": {
+        "text": "Finalmente, une a su causa a Liora, una pícaro ágil y astuta con una reputación de habilidad en el sigilo y el rastreo.",
+        "next": "grupo_5",
+        "audio": "assets/sounds/grupo_4.mp3"
+    },
+    "grupo_5": {
+        "text": "Con el grupo reunido, Dilia y sus nuevos compañeros inician el viaje hacia el castillo de Morven. Cada miembro aporta habilidades únicas.",
+        "next": "grupo_6",
+        "audio": "assets/sounds/grupo_5.mp3"
+    },
+    "grupo_6": {
+        "text": "Juntos, enfrentan varios desafíos, desde criaturas que acechan en la penumbra hasta trampas mágicas escondidas en el camino.",
+        "next": "grupo_7",
+        "audio": "assets/sounds/grupo_6.mp3"
+    },
+    "grupo_7": {
+        "text": "La colaboración y el espíritu de equipo se vuelven fundamentales mientras avanzan en su misión.",
+        "next": "decision_2",
+        "audio": "assets/sounds/grupo_7.mp3"
+    },
+    "decision_2": {
+        "text": "Con el castillo de Morven a la vista, el grupo enfrenta una nueva elección crucial. ¿Cómo procederán para alcanzar su objetivo?",
+        "options": [
+            {"text": "Enfrentar las criaturas oscuras directamente", "next": "enfrentar_1"},
+            {"text": "Buscar una ruta alternativa", "next": "ruta_1"}
+        ],
+        "audio": "assets/sounds/decision_2.mp3"
+    },
+    "enfrentar_1": {
+        "text": "Dilia y su grupo deciden enfrentarse a las criaturas oscuras directamente. La batalla que sigue es épica.",
+        "next": "enfrentar_2",
+        "audio": "assets/sounds/enfrentar_1.mp3"
+    },
+    "enfrentar_2": {
+        "text": "Los enemigos emergen en oleadas, y cada miembro del grupo juega un papel crucial. La lucha es intensa y agotadora.",
+        "next": "enfrentar_3",
+        "audio": "assets/sounds/enfrentar_2.mp3"
+    },
+    "enfrentar_3": {
+        "text": "Después de la feroz batalla, el grupo llega al castillo de Morven. Exhaustos pero decididos, preparan su plan de asalto.",
+        "next": "end",
+        "audio": "assets/sounds/enfrentar_3.mp3"
+    },
+    "ruta_1": {
+        "text": "El grupo opta por una ruta alternativa para evitar enfrentamientos innecesarios. Aunque la ruta es más larga, les permite esquivar las principales oleadas de criaturas oscuras.",
+        "next": "ruta_2",
+        "audio": "assets/sounds/ruta_1.mp3"
+    },
+    "ruta_2": {
+        "text": "Sin embargo, el camino no está exento de peligros; deben sortear trampas mágicas y resolver acertijos antiguos para seguir adelante.",
+        "next": "ruta_3",
+        "audio": "assets/sounds/ruta_2.mp3"
+    },
+    "ruta_3": {
+        "text": "Al llegar al castillo, el grupo se enfrenta a las últimas pruebas para llegar a Morven. Con su energía renovada, deben enfrentarse a las defensas internas del castillo.",
+        "next": "end",
+        "audio": "assets/sounds/ruta_3.mp3"
+    },
+    "end": {
+        "text": "Dilia y sus aliados han completado su misión, aunque el camino ha sido arduo y lleno de desafíos. El bosque de Eldoria está a salvo, pero el costo de la victoria ha sido alto.",
+        "next": "end_2",
+        "audio": "assets/sounds/end.mp3"
+    },
+    "end_2": {
+        "text": "Cada miembro del grupo regresa a su hogar con cicatrices físicas y emocionales, pero también con el orgullo de haber salvado su tierra. Dilia, aunque cansada y marcada por la batalla, regresa a su hogar como una heroína venerada.",
+        "next": null,
+        "audio": "assets/sounds/end_2.mp3"
+    }
+}
