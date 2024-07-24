@@ -7,17 +7,14 @@
 El proyecto tiene la siguiente estructura de carpetas:
 
 Delia/
-│
 ├── assets/
 │ ├── file.png
 │ ├── fuentes/
 │ │ └── Baby_Stingrays.ttf
 │ └── sounds/
 │ └── Bosque_Encantado.mp3
-│
 ├── dialogues.json
-├── main.py
-
+└── main.py
 markdown
 Copiar código
 
