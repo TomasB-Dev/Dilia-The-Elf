@@ -12,6 +12,19 @@ pygame.display.set_caption("Dilia The Elf")
 # Carga la imagen de fondo
 background_image = pygame.image.load("assets/file.png")
 
+# Carga y redimensiona las imágenes del botón de mute/desmute manteniendo la proporción
+def load_and_scale_image(image_path, scale_factor):
+    image = pygame.image.load(image_path)
+    width, height = image.get_size()
+    new_size = (int(width * scale_factor), int(height * scale_factor))
+    return pygame.transform.scale(image, new_size)
+
+mute_button_image = load_and_scale_image("assets/img/mute.png", 0.1)  # Ajusta el factor de escala según sea necesario
+unmute_button_image = load_and_scale_image("assets/img/unmute.png", 0.2)
+
+# Define la posición del botón de mute en la esquina superior derecha
+mute_button_rect = mute_button_image.get_rect(topright=(780, 20))
+
 # Configura la fuente
 font_family = "assets/fuentes/Baby_Stingrays.ttf"
 font = pygame.font.Font(font_family, 36)
@@ -112,6 +125,7 @@ def main():
     show_start_screen()
     
     current_node = 'start'
+    is_muted = False  # Variable para manejar el estado del mute
 
     while True:
         if current_node not in dialogues:
@@ -139,8 +153,8 @@ def main():
             for i, line in enumerate(lines):
                 render_text_with_shadow(line, dialog_box_x + box_padding, dialog_box_y + box_padding + i * line_height)
 
-        # Reproduce la pista de audio correspondiente
-        if 'audio' in node:
+        # Reproduce la pista de audio correspondiente si no está en mute
+        if 'audio' in node and not is_muted:
             play_audio(node['audio'])
                 
         # Dibuja opciones si existen
@@ -155,6 +169,12 @@ def main():
                 render_text_with_shadow(option_text, option_x, option_y)  # Texto con sombra
                 option_y += 90  # Espaciado entre opciones
 
+        # Dibuja el botón de mute/desmute
+        if is_muted:
+            screen.blit(mute_button_image, mute_button_rect)
+        else:
+            screen.blit(unmute_button_image, mute_button_rect)
+
         pygame.display.flip()
 
         # Espera a que el usuario haga clic
@@ -165,24 +185,32 @@ def main():
                     pygame.quit()
                     return
                 elif event.type == pygame.MOUSEBUTTONDOWN:
-                    waiting_for_input = False
-                    if 'options' in node:
-                        # Manejo de opciones si existen
-                        x, y = pygame.mouse.get_pos()
-                        option_y = 450
-                        for option in node['options']:
-                            option_width = font.size(option['text'])[0]
-                            option_x = (800 - option_width) // 2
-                            if option_x - 10 < x < option_x + option_width + 10 and option_y - 10 < y < option_y + line_height + 10:
-                                current_node = option['next']
-                                break
-                            option_y += 60  # Espaciado entre opciones
-                    else:
-                        if 'next' in node:
-                            current_node = node['next']
+                    x, y = pygame.mouse.get_pos()
+                    # Verifica si se hizo clic en el botón de mute/desmute
+                    if mute_button_rect.collidepoint(x, y):
+                        is_muted = not is_muted
+                        if is_muted:
+                            pygame.mixer.music.pause()
                         else:
-                            show_start_screen()
-                            current_node = 'start'
+                            pygame.mixer.music.unpause()
+                    else:
+                        waiting_for_input = False
+                        if 'options' in node:
+                            # Manejo de opciones si existen
+                            option_y = 450
+                            for option in node['options']:
+                                option_width = font.size(option['text'])[0]
+                                option_x = (800 - option_width) // 2
+                                if option_x - 10 < x < option_x + option_width + 10 and option_y - 10 < y < option_y + line_height + 10:
+                                    current_node = option['next']
+                                    break
+                                option_y += 60  # Espaciado entre opciones
+                        else:
+                            if 'next' in node:
+                                current_node = node['next']
+                            else:
+                                show_start_screen()
+                                current_node = 'start'
 
 if __name__ == "__main__":
     main()
