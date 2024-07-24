@@ -26,7 +26,7 @@ unmute_button_image = load_and_scale_image("assets/img/unmute.png", 0.2)
 mute_button_rect = mute_button_image.get_rect(topright=(780, 20))
 
 # Configura la fuente
-font_family = "assets/fuentes/Baby_Stingrays.ttf"
+font_family = "assets/fuentes/Alone_On_Earth.otf"
 font = pygame.font.Font(font_family, 36)
 font_start = pygame.font.Font(font_family, 90)
 line_height = 40
@@ -118,6 +118,36 @@ def show_start_screen():
                 if play_button_rect.collidepoint(x, y):  # Verifica si se hizo clic en el botón "JUGAR"
                     waiting_for_input = False
 
+# Muestra los créditos y vuelve a la pantalla inicial
+def show_credits():
+    print("Creditos funciona")
+    screen.fill((255, 255, 255))  # Fondo negro
+
+    credits_text = [
+        "Créditos",
+        "",
+        "Desarrollado por Tomas Dev",
+        "Gracias por jugar!",
+        "",
+        "Agradecimientos especiales a:",
+        "- Docallisme por la Fuente",
+        "- Monster por el insomnio",
+        "",
+        "Fin."
+    ]
+
+    y_offset = 100
+    for line in credits_text:
+        text_surface, text_rect = render_centered_text(line, font, screen.get_width(), y_offset)
+        screen.blit(text_surface, text_rect)
+        y_offset += 50
+
+    pygame.display.flip()
+
+    # Espera unos segundos antes de volver a la pantalla inicial
+    pygame.time.wait(9000)
+    show_start_screen()
+
 # Función principal del juego
 def main():
     dialogues = load_dialogues('dialogues.json')
@@ -143,9 +173,9 @@ def main():
             screen.blit(scaled_image, (0, 310))
         
         # Dibuja el cuadro de diálogo y renderiza el texto
-        dialog_box_x, dialog_box_y = 50, 50
+        dialog_box_x, dialog_box_y = 50, 75
         dialog_box_width = max_width
-        dialog_box_height = 300
+        dialog_box_height = 240
         draw_dialogue_box(dialog_box_x, dialog_box_y, dialog_box_width, dialog_box_height)
 
         if 'text' in node:
@@ -208,6 +238,9 @@ def main():
                         else:
                             if 'next' in node:
                                 current_node = node['next']
+                                if current_node == 'end' :  # Verifica si es el nodo de finalización
+                                    show_credits()  # Muestra los créditos y vuelve a la pantalla inicial
+                                    current_node = 'start'
                             else:
                                 show_start_screen()
                                 current_node = 'start'
