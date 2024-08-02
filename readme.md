@@ -7,6 +7,7 @@
 El proyecto tiene la siguiente estructura de carpetas:
  
  Delia/
+ 
  ├── assets/  
  │ ├── file.png  
  │ ├── fuentes/  
