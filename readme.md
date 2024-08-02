@@ -5,15 +5,15 @@
 ## Estructura del Proyecto
 
 El proyecto tiene la siguiente estructura de carpetas:
-Delia/
-├── assets/ 
-│ ├── file.png 
-│ ├── fuentes/ 
-│ │ └── Baby_Stingrays.ttf 
-│ └── sounds/ 
-│ └── Bosque_Encantado.mp3 
-├── dialogues.json 
-└── main.py 
+ Delia/
+ ├── assets/ 
+ │ ├── file.png 
+ │ ├── fuentes/ 
+ │ │ └── Baby_Stingrays.ttf 
+ │ └── sounds/ 
+ │ └── Bosque_Encantado.mp3 
+ ├── dialogues.json 
+ └── main.py 
 
  - `assets/file.png`: Imagen de fondo utilizada en el juego.
 - `assets/fuentes/Baby_Stingrays.ttf`: Fuente utilizada para el texto en el juego.
