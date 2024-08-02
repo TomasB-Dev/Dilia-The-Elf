@@ -11,7 +11,9 @@ El proyecto tiene la siguiente estructura de carpetas:
  │ ├── file.png  
  │ ├── fuentes/  
  │ │ └── Baby_Stingrays.ttf 
+ 
  │ └── sounds/  
+ 
  │ └── Bosque_Encantado.mp3 
  ├── dialogues.json 
  └── main.py 
