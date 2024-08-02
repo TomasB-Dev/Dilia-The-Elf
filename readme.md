@@ -15,7 +15,9 @@ El proyecto tiene la siguiente estructura de carpetas:
  │ └── sounds/  
  
  │ └── Bosque_Encantado.mp3 
+ 
  ├── dialogues.json 
+ 
  └── main.py 
  
 
