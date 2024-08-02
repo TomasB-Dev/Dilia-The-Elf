@@ -113,32 +113,38 @@
     "grupo_1": {
         "text": "Dilia decide que necesita más que su habilidad y coraje para enfrentar el desafío. Busca a los mejores y más confiables aliados que pueda encontrar.",
         "next": "grupo_2",
-        "audio": "assets/sounds/grupo_1.mp3"
+        "audio": "assets/sounds/grupo_1.mp3",
+        "img": "assets/img/dilia2.png"
     },
     "grupo_2": {
         "text": "Su primera parada es en la aldea de los enanos, donde recluta a Thrain, un fuerte guerrero conocido por su destreza en el combate.",
         "next": "grupo_3",
-        "audio": "assets/sounds/grupo_2.mp3"
+        "audio": "assets/sounds/grupo_2.mp3",
+        "img": "assets/img/dilia2.png"
     },
     "grupo_3": {
         "text": "Luego, visita la torre de los magos para convencer a Elara, una hechicera con amplios conocimientos de magia antigua.",
         "next": "grupo_4",
-        "audio": "assets/sounds/grupo_3.mp3"
+        "audio": "assets/sounds/grupo_3.mp3",
+        "img": "assets/img/dilia2.png"
     },
     "grupo_4": {
         "text": "Finalmente, une a su causa a Liora, una pícaro ágil y astuta con una reputación de habilidad en el sigilo y el rastreo.",
         "next": "grupo_5",
-        "audio": "assets/sounds/grupo_4.mp3"
+        "audio": "assets/sounds/grupo_4.mp3",
+        "img": "assets/img/dilia2.png"
     },
     "grupo_5": {
         "text": "Con el grupo reunido, Dilia y sus nuevos compañeros inician el viaje hacia el castillo de Morven. Cada miembro aporta habilidades únicas.",
         "next": "grupo_6",
-        "audio": "assets/sounds/grupo_5.mp3"
+        "audio": "assets/sounds/grupo_5.mp3",
+        "img": "assets/img/dilia2.png"
     },
     "grupo_6": {
         "text": "Juntos, enfrentan varios desafíos, desde criaturas que acechan en la penumbra hasta trampas mágicas escondidas en el camino.",
         "next": "grupo_7",
-        "audio": "assets/sounds/grupo_6.mp3"
+        "audio": "assets/sounds/grupo_6.mp3",
+        "img": "assets/img/dilia2.png"
     },
     "grupo_7": {
         "text": "La unidad y el trabajo en equipo de Dilia y su grupo les permiten superar los obstáculos y finalmente llegar al castillo de Morven.",
@@ -146,7 +152,8 @@
             {"text": "Asaltar el castillo directamente", "next": "grupo_assault"},
             {"text": "Buscar una entrada secreta", "next": "grupo_secret"}
         ],
-        "audio": "assets/sounds/grupo_7.mp3"
+        "audio": "assets/sounds/grupo_7.mp3",
+        "img": "assets/img/dilia2.png"
     },
     "grupo_assault": {
         "text": "Dilia decide asaltar el castillo directamente. La batalla es épica y brutal, pero con la combinación de sus habilidades, logran derrotar a Morven.",

@@ -1,6 +1,6 @@
 import pygame
 import json
-
+import math 
 # Inicializa Pygame y el mezclador de audio
 pygame.init()
 pygame.mixer.init()
@@ -11,6 +11,10 @@ pygame.display.set_caption("Dilia The Elf")
 
 # Carga la imagen de fondo
 background_image = pygame.image.load("assets/file.png")
+# icono de la ventana
+icon_image = pygame.image.load("assets/icono.png")  
+scaled_icon = pygame.transform.scale(icon_image, (100, 100))  
+pygame.display.set_icon(scaled_icon)
 
 # Carga y redimensiona las imágenes del botón de mute/desmute manteniendo la proporción
 def load_and_scale_image(image_path, scale_factor):
@@ -92,23 +96,27 @@ def render_centered_text(text, font, screen_width, y_offset):
 
 # Pantalla de inicio
 def show_start_screen():
-    screen.blit(background_image, (0, 0))  # Usa la imagen de fondo
-
-    screen_width, screen_height = screen.get_size()
-
-    # Renderiza y centra el título
-    title_text, title_rect = render_centered_text("Dilia The Elf", font_start, screen_width, screen_height / 2 - 50)
-    screen.blit(title_text, title_rect)
-
-    # Renderiza y centra el botón "JUGAR"
-    play_button_text, play_button_rect = render_centered_text("JUGAR", font_start, screen_width, screen_height / 2 + 50)
-    screen.blit(play_button_text, play_button_rect)
+    clock = pygame.time.Clock()
+    animation_start_time = pygame.time.get_ticks()
     
-    pygame.display.flip()
+    while True:
+        screen.blit(background_image, (0, 0))  # Usa la imagen de fondo
 
-    # Espera a que el usuario haga clic en el botón de jugar
-    waiting_for_input = True
-    while waiting_for_input:
+        screen_width, screen_height = screen.get_size()
+
+        # Renderiza y centra el título
+        title_text, title_rect = render_centered_text("Dilia The Elf", font_start, screen_width, screen_height / 2 - 50)
+        screen.blit(title_text, title_rect)
+
+        # Animación del botón "JUGAR"
+        elapsed_time = (pygame.time.get_ticks() - animation_start_time) / 1000.0
+        scale_factor = 1 + 0.05 * math.sin(elapsed_time * 2 * math.pi)  # Ajusta la velocidad y amplitud de la animación
+        animated_font = pygame.font.Font(font_family, int(90 * scale_factor))
+        play_button_text, play_button_rect = render_centered_text("JUGAR", animated_font, screen_width, screen_height / 2 + 50)
+        screen.blit(play_button_text, play_button_rect)
+
+        pygame.display.flip()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -116,7 +124,9 @@ def show_start_screen():
             elif event.type == pygame.MOUSEBUTTONDOWN:
                 x, y = pygame.mouse.get_pos()
                 if play_button_rect.collidepoint(x, y):  # Verifica si se hizo clic en el botón "JUGAR"
-                    waiting_for_input = False
+                    return
+        
+        clock.tick(60)
 
 # Muestra los créditos y vuelve a la pantalla inicial
 def show_credits():
@@ -132,7 +142,8 @@ def show_credits():
         "Agradecimientos especiales a:",
         "- Docallisme por la Fuente",
         "- Monster por el insomnio",
-        "",
+        "- Dark Por Las recomendaciones",
+        "- Filo por el 'testing'",
         "Fin."
     ]
 
@@ -140,12 +151,12 @@ def show_credits():
     for line in credits_text:
         text_surface, text_rect = render_centered_text(line, font, screen.get_width(), y_offset)
         screen.blit(text_surface, text_rect)
-        y_offset += 50
+        y_offset += 40
 
     pygame.display.flip()
 
     # Espera unos segundos antes de volver a la pantalla inicial
-    pygame.time.wait(9000)
+    pygame.time.wait(10000)
     show_start_screen()
 
 # Función principal del juego
