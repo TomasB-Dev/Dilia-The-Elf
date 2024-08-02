@@ -5,8 +5,8 @@
 ## Estructura del Proyecto
 
 El proyecto tiene la siguiente estructura de carpetas:
- Delia/
  
+ Delia/
  ├── assets/  
  │ ├── file.png  
  │ ├── fuentes/  
