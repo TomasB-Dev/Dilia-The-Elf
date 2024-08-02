@@ -7,10 +7,8 @@
 El proyecto tiene la siguiente estructura de carpetas:
  Delia/
  
- ├── assets/ 
- 
- │ ├── file.png 
- 
+ ├── assets/  
+ │ ├── file.png  
  │ ├── fuentes/ 
  
  │ │ └── Baby_Stingrays.ttf 
