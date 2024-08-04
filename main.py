@@ -33,10 +33,12 @@ def load_and_scale_image(image_path, scale_factor):
     width, height = image.get_size()
     new_size = (int(width * scale_factor), int(height * scale_factor))
     return pygame.transform.scale(image, new_size)
+
 #boton de discord
 discord_button_image = load_and_scale_image("assets/img/discord.png", 0.3)
 discord_button_rect = discord_button_image.get_rect(bottomleft=(20, 580))
 discord_url = "https://discord.gg/PcChBEUmDT"
+
 #btn mute
 mute_button_image = load_and_scale_image("assets/img/mute.png", 0.1) 
 unmute_button_image = load_and_scale_image("assets/img/unmute.png", 0.2)
@@ -115,7 +117,7 @@ def render_text_with_wrapping(text, x, y, max_width, color=(255, 255, 255)):
 # Dibuja un fondo atras del texto
 def draw_dialogue_box(x, y, width, height, color=(0, 0, 0), alpha=200):
     """
-    Dibuja un cuadro de diálogo con un fondo.
+    Dibuja un cuadro de diálogo con bordes redondeados y un fondo texturizado.
     Args:
         x (int): Coordenada x de la posición del cuadro.
         y (int): Coordenada y de la posición del cuadro.
@@ -124,9 +126,19 @@ def draw_dialogue_box(x, y, width, height, color=(0, 0, 0), alpha=200):
         color (tuple): Color del cuadro en formato RGB.
         alpha (int): Nivel de transparencia del cuadro (0-255).
     """
-    box_surf = pygame.Surface((width, height))
+    box_surf = pygame.Surface((width, height), pygame.SRCALPHA)
     box_surf.set_alpha(alpha)
-    box_surf.fill(color)
+    
+    # Dibuja un rectángulo redondeado
+    rect = pygame.Rect(0, 0, width, height)
+    pygame.draw.rect(box_surf, color, rect, border_radius=20)
+    
+    # Añadir una textura sutil (opcional)
+    texture = pygame.image.load('assets/texture.jpg')
+    texture = pygame.transform.scale(texture, (width, height))
+    texture.set_alpha(70)  # Ajusta la transparencia de la textura
+    box_surf.blit(texture, (0, 0))
+    
     screen.blit(box_surf, (x, y))
 
 # Reproduce el dialogo 
@@ -244,6 +256,7 @@ def show_credits():
     # Espera unos segundos antes de volver a la pantalla inicial
     pygame.time.wait(10000)
     show_start_screen()
+
 
 # Función principal del juego
 def main():
