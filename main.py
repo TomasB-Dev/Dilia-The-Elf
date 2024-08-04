@@ -1,6 +1,7 @@
 import pygame
 import json
 import math 
+import webbrowser
 # Inicializa Pygame y el mezclador de audio
 pygame.init()
 pygame.mixer.init()
@@ -17,6 +18,7 @@ icon_image = pygame.image.load("assets/icono.png")
 scaled_icon = pygame.transform.scale(icon_image, (100, 100))  
 pygame.display.set_icon(scaled_icon)
 
+
 # Carga y redimensiona las imágenes del botón de mute/desmute manteniendo la proporción
 def load_and_scale_image(image_path, scale_factor):
     """
@@ -31,7 +33,11 @@ def load_and_scale_image(image_path, scale_factor):
     width, height = image.get_size()
     new_size = (int(width * scale_factor), int(height * scale_factor))
     return pygame.transform.scale(image, new_size)
-
+#boton de discord
+discord_button_image = load_and_scale_image("assets/img/discord.png", 0.3)
+discord_button_rect = discord_button_image.get_rect(bottomleft=(20, 580))
+discord_url = "https://discord.gg/PcChBEUmDT"
+#btn mute
 mute_button_image = load_and_scale_image("assets/img/mute.png", 0.1) 
 unmute_button_image = load_and_scale_image("assets/img/unmute.png", 0.2)
 
@@ -177,11 +183,20 @@ def show_start_screen():
         screen.blit(title_text, title_rect)
 
         # Animación del botón "JUGAR"
+        # Calcula el tiempo transcurrido en segundos desde que comenzó la animación
         elapsed_time = (pygame.time.get_ticks() - animation_start_time) / 1000.0
+        # Calcula un factor de escala basado en una función seno para crear una animación de "latido" (pulso) en el texto
+        # `math.sin(elapsed_time * 2 * math.pi)` produce un valor oscilante entre -1 y 1, creando un ciclo completo (onda seno)
+        # Multiplicar por 2 * math.pi ajusta la velocidad de la oscilación
+        # Multiplicar por 0.05 ajusta la amplitud de la oscilación
+        # `1 +` asegura que el factor de escala oscile entre 0.95 y 1.05
         scale_factor = 1 + 0.05 * math.sin(elapsed_time * 2 * math.pi)  # Ajusta la velocidad y amplitud de la animación
+        # Crea una fuente animada, ajustando su tamaño en función del factor de escala calculado
+        # El tamaño de la fuente varía alrededor de 90 píxeles, creciendo y encogiéndose de acuerdo con `scale_factor`
         animated_font = pygame.font.Font(font_family, int(90 * scale_factor))
         play_button_text, play_button_rect = render_centered_text("JUGAR", animated_font, screen_width, screen_height / 2 + 50)
         screen.blit(play_button_text, play_button_rect)
+        screen.blit(discord_button_image, discord_button_rect)
 
         pygame.display.flip()
 
@@ -193,6 +208,9 @@ def show_start_screen():
                 x, y = pygame.mouse.get_pos()
                 if play_button_rect.collidepoint(x, y):  # Verifica si se hizo clic en el botón "JUGAR"
                     return
+                elif discord_button_rect.collidepoint(x, y):  # Verifica si se hizo clic en el botón de Discord
+                    webbrowser.open(discord_url)  # Abre el enlace de Discord
+
         
         clock.tick(60)
 
