@@ -5,28 +5,37 @@ import math
 pygame.init()
 pygame.mixer.init()
 
-# Configura la pantalla
+# Configuracion de la pantalla
 screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("Dilia The Elf")
 
-# Carga la imagen de fondo
+# imagen de fondo
 background_image = pygame.image.load("assets/file.png")
 # icono de la ventana
 icon_image = pygame.image.load("assets/icono.png")  
+# escalo la imagen
 scaled_icon = pygame.transform.scale(icon_image, (100, 100))  
 pygame.display.set_icon(scaled_icon)
 
 # Carga y redimensiona las imágenes del botón de mute/desmute manteniendo la proporción
 def load_and_scale_image(image_path, scale_factor):
+    """
+    Carga una imagen desde una ruta y la escala por un factor dado.
+    Args:
+        image_path (str): Ruta de la imagen a cargar.
+        scale_factor (float): Factor por el cual escalar la imagen.
+    Returns:
+        pygame.Surface: Imagen escalada.
+    """
     image = pygame.image.load(image_path)
     width, height = image.get_size()
     new_size = (int(width * scale_factor), int(height * scale_factor))
     return pygame.transform.scale(image, new_size)
 
-mute_button_image = load_and_scale_image("assets/img/mute.png", 0.1)  # Ajusta el factor de escala según sea necesario
+mute_button_image = load_and_scale_image("assets/img/mute.png", 0.1) 
 unmute_button_image = load_and_scale_image("assets/img/unmute.png", 0.2)
 
-# Define la posición del botón de mute en la esquina superior derecha
+# posicion del btn mute
 mute_button_rect = mute_button_image.get_rect(topright=(780, 20))
 
 # Configura la fuente
@@ -37,13 +46,30 @@ line_height = 40
 max_width = 700
 box_padding = 20  # Espacio interno del cuadro de diálogo
 
-# Carga los diálogos desde el archivo JSON
+# Carga el JSON
 def load_dialogues(filename):
+    """
+    Carga los diálogos el archivo JSON.
+    Args:
+        filename (str): Ruta del archivo JSON.
+    Returns:
+        dict: Contenido del archivo JSON cargado.
+    """
     with open(filename, 'r', encoding='utf-8') as f:
         return json.load(f)
 
 # Renderiza el texto con sombra
 def render_text_with_shadow(text, x, y, text_color=(255, 255, 255), shadow_color=(0, 0, 0), shadow_offset=(2, 2)):
+    """
+    Renderiza texto con una sombra.
+    Args:
+        text (str): Texto a renderizar.
+        x (int): Coordenada x de la posición del texto.
+        y (int): Coordenada y de la posición del texto.
+        text_color (tuple): Color del texto en formato RGB.
+        shadow_color (tuple): Color de la sombra en formato RGB.
+        shadow_offset (tuple): Desplazamiento de la sombra en píxeles.
+    """
     # Renderiza la sombra
     shadow_surf = font.render(text, True, shadow_color)
     shadow_rect = shadow_surf.get_rect(topleft=(x + shadow_offset[0], y + shadow_offset[1]))
@@ -56,6 +82,15 @@ def render_text_with_shadow(text, x, y, text_color=(255, 255, 255), shadow_color
 
 # Ajusta el texto dentro del cuadro de diálogo con salto de línea automático
 def render_text_with_wrapping(text, x, y, max_width, color=(255, 255, 255)):
+    """
+    Ajusta el texto dentro de un cuadro de diálogo con salto de línea automático.
+    Args:
+        text (str): Texto a renderizar.
+        x (int): Coordenada x de la posición del texto.
+        y (int): Coordenada y de la posición del texto.
+        max_width (int): Ancho máximo del texto.
+        color (tuple): Color del texto en formato RGB.
+    """
     words = text.split(' ')
     lines = []
     current_line = ""
@@ -71,31 +106,64 @@ def render_text_with_wrapping(text, x, y, max_width, color=(255, 255, 255)):
 
     return lines
 
-# Dibuja un fondo semitransparente detrás del texto
+# Dibuja un fondo atras del texto
 def draw_dialogue_box(x, y, width, height, color=(0, 0, 0), alpha=200):
+    """
+    Dibuja un cuadro de diálogo con un fondo.
+    Args:
+        x (int): Coordenada x de la posición del cuadro.
+        y (int): Coordenada y de la posición del cuadro.
+        width (int): Ancho del cuadro.
+        height (int): Alto del cuadro.
+        color (tuple): Color del cuadro en formato RGB.
+        alpha (int): Nivel de transparencia del cuadro (0-255).
+    """
     box_surf = pygame.Surface((width, height))
     box_surf.set_alpha(alpha)
     box_surf.fill(color)
     screen.blit(box_surf, (x, y))
 
-# Reproduce el audio correspondiente
+# Reproduce el dialogo 
 def play_audio(audio_file):
+    """
+    Reproduce un archivo de audio.
+    Args:
+        audio_file (str): Ruta del archivo de audio a reproducir.
+    """
     pygame.mixer.Sound(audio_file).play()
 
 # Reproduce la música de fondo
 def play_background_music(music_file):
+    """
+    Reproduce música de fondo en bucle.
+    Args:
+        music_file (str): Ruta del archivo de música a reproducir.
+    """
     pygame.mixer.music.load(music_file)
     pygame.mixer.music.play(-1)  # Reproduce en bucle
     pygame.mixer.music.set_volume(0.07)
 
 # Renderiza texto centrado
 def render_centered_text(text, font, screen_width, y_offset):
+    """
+    Renderiza texto centrado en la pantalla.
+    Args:
+        text (str): Texto a renderizar.
+        font (pygame.font.Font): Fuente del texto.
+        screen_width (int): Ancho de la pantalla.
+        y_offset (int): Desplazamiento vertical del texto.
+    Returns:
+        tuple: Superficie y rectángulo del texto renderizado.
+    """
     text_surface = font.render(text, True, (0, 0, 0))
     text_rect = text_surface.get_rect(center=(screen_width / 2, y_offset))
     return text_surface, text_rect
 
 # Pantalla de inicio
 def show_start_screen():
+    """
+    Muestra la pantalla de inicio con animación del botón "JUGAR".
+    """
     clock = pygame.time.Clock()
     animation_start_time = pygame.time.get_ticks()
     
@@ -131,7 +199,7 @@ def show_start_screen():
 # Muestra los créditos y vuelve a la pantalla inicial
 def show_credits():
     print("Creditos funciona")
-    screen.fill((255, 255, 255))  # Fondo negro
+    screen.fill((255, 255, 255)) 
 
     credits_text = [
         "Créditos",
@@ -205,7 +273,7 @@ def main():
                 option_text = option['text']
                 option_width = font.size(option_text)[0]
                 option_x = (800 - option_width) // 2
-                # Dibuja el fondo semitransparente antes de renderizar el texto
+                # Dibuja el fondo antes de renderizar el texto
                 draw_dialogue_box(option_x - 10, option_y - 10, option_width + 20, line_height + 20, color=(0, 0, 0), alpha=150)
                 render_text_with_shadow(option_text, option_x, option_y)  # Texto con sombra
                 option_y += 90  # Espaciado entre opciones
@@ -252,7 +320,7 @@ def main():
                                 if current_node == 'end' :  # Verifica si es el nodo de finalización
                                     show_credits()  # Muestra los créditos y vuelve a la pantalla inicial
                                     current_node = 'start'
-                            else:
+                            else: 
                                 show_start_screen()
                                 current_node = 'start'
 
