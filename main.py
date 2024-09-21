@@ -133,7 +133,7 @@ def draw_dialogue_box(x, y, width, height, color=(0, 0, 0), alpha=200):
     rect = pygame.Rect(0, 0, width, height)
     pygame.draw.rect(box_surf, color, rect, border_radius=20)
     
-    # Añadir una textura sutil (opcional)
+  
     texture = pygame.image.load('assets/texture.jpg')
     texture = pygame.transform.scale(texture, (width, height))
     texture.set_alpha(70)  # Ajusta la transparencia de la textura
@@ -141,7 +141,7 @@ def draw_dialogue_box(x, y, width, height, color=(0, 0, 0), alpha=200):
     
     screen.blit(box_surf, (x, y))
 
-# Reproduce el dialogo 
+
 def play_audio(audio_file):
     """
     Reproduce un archivo de audio.
@@ -194,17 +194,11 @@ def show_start_screen():
         title_text, title_rect = render_centered_text("Dilia The Elf", font_start, screen_width, screen_height / 2 - 50)
         screen.blit(title_text, title_rect)
 
-        # Animación del botón "JUGAR"
-        # Calcula el tiempo transcurrido en segundos desde que comenzó la animación
+   
         elapsed_time = (pygame.time.get_ticks() - animation_start_time) / 1000.0
-        # Calcula un factor de escala basado en una función seno para crear una animación de "latido" (pulso) en el texto
-        # `math.sin(elapsed_time * 2 * math.pi)` produce un valor oscilante entre -1 y 1, creando un ciclo completo (onda seno)
-        # Multiplicar por 2 * math.pi ajusta la velocidad de la oscilación
-        # Multiplicar por 0.05 ajusta la amplitud de la oscilación
-        # `1 +` asegura que el factor de escala oscile entre 0.95 y 1.05
-        scale_factor = 1 + 0.05 * math.sin(elapsed_time * 2 * math.pi)  # Ajusta la velocidad y amplitud de la animación
-        # Crea una fuente animada, ajustando su tamaño en función del factor de escala calculado
-        # El tamaño de la fuente varía alrededor de 90 píxeles, creciendo y encogiéndose de acuerdo con `scale_factor`
+
+        scale_factor = 1 + 0.05 * math.sin(elapsed_time * 2 * math.pi) 
+
         animated_font = pygame.font.Font(font_family, int(90 * scale_factor))
         play_button_text, play_button_rect = render_centered_text("JUGAR", animated_font, screen_width, screen_height / 2 + 50)
         screen.blit(play_button_text, play_button_rect)
